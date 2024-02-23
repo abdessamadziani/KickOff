@@ -1,15 +1,20 @@
 import React,{useState,useEffect} from 'react'
-import { Text,View,Image,StyleSheet, ScrollView } from 'react-native'
+import { Text,View,Image,StyleSheet, ScrollView, Pressable } from 'react-native'
 import morocco from '../../../assets/morocco-flag.png'
 import spain from '../../../assets/Spain-flag.png'
 import stade from '../../../assets/players1.jpg'
+import { useNavigation } from '@react-navigation/native';
+import PlayerDetails from '../PlayerDetails/PlayerDetails'
 
 import axios from 'axios'
 
 function Players() {
 
+  const navigation = useNavigation();
 
-
+  const handleMatchPress = (playerid)=>{
+    navigation.navigate('PlayerDetails', { playerId: playerid }); // Navigate after state update
+   }
   
 
   const [players, setPlayers] = useState([]);
@@ -37,7 +42,7 @@ function Players() {
     fetchPlayers();
   }, []);
   console.log("direct ::: ",players?.data)
-
+ 
   return (
 
   
@@ -48,35 +53,13 @@ function Players() {
       <View style={styles.container}>
         <Image source={stade} style={styles.img}></Image>
             <View style={styles.card}>
-            {/* {players?.data?.map((player, index) => ( */}
-            {players?.data?.map((player) => (
-                <View  style={{flexDirection: 'row',  gap:30 ,alignSelf:'center'}}> 
-                     <Image key={player.id} source={{uri:player.image_path}} style={styles.flag}></Image>
-                     <Image key={player.id} source={{uri:player.image_path}}  style={styles.flag}></Image>
-                     <Image key={player.id} source={{uri:player.image_path}} style={styles.flag}></Image>
-                     <Image key={player.id} source={{uri:player.image_path}}  style={styles.flag} ></Image>
+             {players?.data?.map((player,index) => (
+              <Pressable onPress={()=>handleMatchPress(player.id)}>
+                <View key={index}  > 
+                        <Image key={player.id} source={{uri:player.image_path}} style={styles.flag}></Image>
                 </View>
-                 
+                </Pressable>
                 ))}
-
-                {/* <View style={{flexDirection: 'row', columnGap:35,marginVertical:20,paddingHorizontal:35,alignSelf:'center',marginLeft:15}}>
-                  <Text style={styles.text_score}>{matche?.data?.scores[2]?.score.goals}</Text> 
-                  <Text style={styles.text_score}>-</Text> 
-                  <Text style={styles.text_score}>{matche?.data?.scores[5]?.score.goals}</Text> 
-                </View> */}
-                {/* <View style={{flexDirection: 'row', columnGap:35,marginVertical:20,paddingHorizontal:35,alignSelf:'center',marginLeft:15}}>
-                  <Text style={styles.text}>League Name</Text> 
-                  <Text style={styles.text}>{matche?.data?.league.name}</Text> 
-                </View>
-                <View style={{flexDirection: 'row', columnGap:35,marginVertical:20,paddingHorizontal:35,alignSelf:'center',marginLeft:15}}>
-                  <Text style={styles.text}>stadium</Text> 
-                  <Text style={styles.text}>{matche?.data?.venue.name}</Text> 
-                </View>
-                <View style={{flexDirection: 'row', columnGap:35,marginVertical:20,paddingHorizontal:35,alignSelf:'center',marginLeft:15}}>
-                  <Text style={styles.text}>Result</Text> 
-                  <Text style={styles.text}>{matche?.data?.result_info} </Text> 
-                </View> */}
-    
             </View>
         </View>
     </ScrollView>
@@ -97,12 +80,15 @@ const styles = StyleSheet.create({
 
     },
     card: {
+        flexDirection: 'row',
+        gap:30,
         padding: 20,
         width:350,
         margin:5,
         backgroundColor:'#1F4172',
         borderRadius:8,
         marginTop:20,
+        flexWrap:'wrap'
 
   
       },

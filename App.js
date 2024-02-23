@@ -3,9 +3,10 @@ import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import HomePage from './src/screens/HomePage/HomePage'
-import AllMatches from './src/screens/AllMatches/AllMatches'
-import MatchDetails from './src/screens/MatchDetails/MatchDetails'
+import {AllMatches, MDetails, MatchesStack} from './src/screens/AllMatches/AllMatches'
+import {MatchDetails} from './src/screens/MatchDetails/MatchDetails'
 import Players from './src/screens/Players/Players'
+import PlayerDetails from './src/screens/PlayerDetails/PlayerDetails';
 
 
 // import { Provider, useDispatch, useSelector } from 'react-redux';
@@ -61,14 +62,18 @@ export default function App() {
           />
           <Tab.Screen
             name="AllMatches"
-            component={AllMatches}
+            component={MatchesStack}
             options={{
-              tabBarLabel: 'Matches',
+              tabBarLabel: 'AllMatches',
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="panorama-sphere" color={color} size={26} />
               ),
             }}
           />
+            {/* <Tab.Screen
+            name="MatchDetails"
+            component={MatchDetails}
+            />  */}
           <Tab.Screen
             name="Players"
             component={Players}
@@ -89,11 +94,21 @@ export default function App() {
               ),
             }}
           />
-            <Tab.Screen
+            {/* <Tab.Screen
             name="MatchDetails"
             component={MatchDetails}
             options={{
               tabBarLabel: 'Details',
+              tabBarIcon: ({ color }) => (
+                <MaterialCommunityIcons name="Details" color={color} size={26} />
+              ),
+            }}
+          /> */}
+               <Tab.Screen
+            name="PlayerDetails"
+            component={PlayerDetails}
+            options={{
+              tabBarLabel: 'PlayerDetails',
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="Details" color={color} size={26} />
               ),
