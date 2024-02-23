@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import HomePage from './src/screens/HomePage/HomePage'
 import AllMatches from './src/screens/AllMatches/AllMatches'
 import MatchDetails from './src/screens/MatchDetails/MatchDetails'
+import Players from './src/screens/Players/Players'
 
 
 // import { Provider, useDispatch, useSelector } from 'react-redux';
@@ -41,7 +42,6 @@ export default function App() {
     </Provider> */}
     
       <NavigationContainer>
-        
         <Tab.Navigator
           initialRouteName="Home"
           activeColor="#610C9F"
@@ -70,10 +70,10 @@ export default function App() {
             }}
           />
           <Tab.Screen
-            name="Teams"
-            component={AllMatches}
+            name="Players"
+            component={Players}
             options={{
-              tabBarLabel: 'Teams',
+              tabBarLabel: 'Players',
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="shield-star" color={color} size={26} />
               ),
@@ -95,7 +95,7 @@ export default function App() {
             options={{
               tabBarLabel: 'Details',
               tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="Detals" color={color} size={26} />
+                <MaterialCommunityIcons name="Details" color={color} size={26} />
               ),
             }}
           />

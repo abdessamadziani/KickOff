@@ -5,7 +5,28 @@ import spain from '../../../assets/Spain-flag.png'
 import CustomCard from '../../components/CustomCard/CustomCard'
 import Cup from '../../../assets/newcap.jpeg'
 import axios from 'axios'
-function AllMatches({navigation}) {
+import { useNavigation } from '@react-navigation/native';
+import MatchDetails from '../MatchDetails/MatchDetails'
+
+
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import MatchDetails from '../MatchDetails/MatchDetails'
+function AllMatches() {
+
+
+  const navigation = useNavigation();
+  
+  // const [mtxId, setMtxId] = useState(0);
+
+  
+  const handleMatchPress = async (matchId) => {
+    // await setMtxId(matchId); // Update state
+    navigation.navigate('MatchDetails', { matchId: matchId }); // Navigate after state update
+  };
+
+
+
 
   const [matches, setMatches] = useState([]);
 
@@ -13,7 +34,6 @@ function AllMatches({navigation}) {
     const fetchMatches = async () => {
       const options = {
         method: 'GET',
-        // url: 'https://api.sportmonks.com/v3/football/fixtures?api_token=fSyr6ZRRSV8pMPng0v0EoX3t2uHU61kau88clbO09bTjWtrQvHurZyQzlBR4',
         url: 'https://api.sportmonks.com/v3/football/fixtures?include=participants&api_token=fSyr6ZRRSV8pMPng0v0EoX3t2uHU61kau88clbO09bTjWtrQvHurZyQzlBR4',
 
         headers: {
@@ -32,16 +52,18 @@ function AllMatches({navigation}) {
 
     fetchMatches();
   }, []);
- //console.log("tt",matches?.data[0]?.participants[1]?.image_path)
   console.log("tt",matches?.data)
+
+
+ 
+
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
+
       <View style={styles.container}>
         <Image  source={Cup} style={styles.img}/>
         <Text style={styles.title}>All Matches</Text>
-        {/* <CustomCard/> */}
-
-
         {matches?.data?.map((matche, index) => (
           <CustomCard
             key={index}
@@ -51,6 +73,8 @@ function AllMatches({navigation}) {
             time={matche.starting_at.split(' ')[1]}
             url1={matche.participants[0].image_path}
             url2={matche.participants[1].image_path}
+            // matcheId={matche.id}
+            onPress={()=> handleMatchPress(matche.id)}
           />
       ))}
       

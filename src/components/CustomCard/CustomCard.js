@@ -7,48 +7,12 @@ import MatchDetails from '../../screens/MatchDetails/MatchDetails'
 
 
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-function CustomCard({url1,url2,name1,name2,date,time}) {
+
+function CustomCard({url1,url2,name1,name2,date,time,onPress}) {
 
   return (
     
    
-
-    // <View style={styles.card}>
-    // <View style={{flexDirection: 'row', columnGap:15}}> 
-    //      {/* <View style={{display:'block'}}>
-    //          <Image source="https://cdn.sportmonks.com/images/soccer/teams/29/1789.png "style={styles.flag}></Image>
-    //          <Text style={styles.text}>Morocco</Text> 
-    //      </View>  */}
-    //      <View style={{ flexDirection: 'column' }}>
-    //        <Image source={{ uri: 'https://cdn.sportmonks.com/images/soccer/teams/29/1789.png' }} style={styles.flag} />
-    //        <Text style={styles.text}>Morocco</Text> 
-    //      </View>
-
-    //      <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>vs</Text>
-    //      <View style={{display:'block'}}>
-    //          <Image source={spain} style={styles.flag}></Image>
-    //          <Text style={styles.text}>Spain</Text> 
-    //      </View>
-    //      <View style={{display:'block' }}>
-    //          <Text style={{color:'#F3F8FF', marginButtom:10,padding:3,backgroundColor:'#49108B',borderRadius:10,textAlign:'center',fontWeight:'bold',fontSize:10}}>Date</Text>
-    //          <Text style={styles.text}>12.12.2024</Text>
-    //      </View>
-    //      <View style={{display:'block' }}>
-    //        <Text style={{color:'#F3F8FF', marginButtom:10,padding:3,backgroundColor:'#49108B',borderRadius:10,textAlign:'center',fontWeight:'bold',fontSize:10}}>Time</Text>
-    //        <Text style={styles.text}>09:00 pm</Text>
-    //      </View>
-    // </View>
-    // <View style={{flexDirection: 'row', columnGap:15,marginTop:20}}>
-    //      <CustomButton onPress={() => navigation.push('MatchDetails')} text="Check Details" style={styles.text_result}/>
-    //      <Text style={styles.text_league}>league Name</Text>
-    // </View>
-    // </View>
-
-
-
-
     <View style={styles.card}>
     <View style={{flexDirection: 'row', columnGap:20}}> 
         
@@ -72,7 +36,7 @@ function CustomCard({url1,url2,name1,name2,date,time}) {
          </View> */}
     </View>
     <View style={{flexDirection: 'row', columnGap:15,marginTop:20}}>
-         <CustomButton onPress={() => navigation.push('MatchDetails')} text="Check Details" style={styles.text_result}/>
+         <CustomButton onPress={onPress} text="Check Details" style={styles.text_result}/>
          {/* <Text style={styles.text_league}>league Name</Text> */}
          <View style={{display:'block' }}>
            <Text style={{color:'#F3F8FF', marginButtom:10,padding:3,backgroundColor:'#FB88B4',borderRadius:10,textAlign:'center',fontWeight:'bold',fontSize:10}}>Time</Text>
