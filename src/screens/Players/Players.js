@@ -1,14 +1,31 @@
 import React,{useState,useEffect} from 'react'
 import { Text,View,Image,StyleSheet, ScrollView, Pressable } from 'react-native'
-import morocco from '../../../assets/morocco-flag.png'
-import spain from '../../../assets/Spain-flag.png'
+
 import stade from '../../../assets/players1.jpg'
 import { useNavigation } from '@react-navigation/native';
-import PlayerDetails from '../PlayerDetails/PlayerDetails'
-
 import axios from 'axios'
 
-function Players() {
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import PlayerDetails from '../PlayerDetails/PlayerDetails';
+
+const Stack = createNativeStackNavigator();
+const PlayersStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Players"
+        options={{ title: "Players" }}
+        component={Players}
+      />
+      <Stack.Screen
+        name="PlayerDetails"
+        options={{ title: "Player details" }}
+        component={PlayerDetails}
+      />
+    </Stack.Navigator>
+  );
+};
+const Players = () => {
 
   const navigation = useNavigation();
 
@@ -48,7 +65,6 @@ function Players() {
   
 
     <ScrollView showsVerticalScrollIndicator={false}>
-       {/* {matche?.data?.map((item, index) => ( */}
 
       <View style={styles.container}>
         <Image source={stade} style={styles.img}></Image>
@@ -122,4 +138,4 @@ const styles = StyleSheet.create({
   
   
 
-export default Players
+export { Players,PlayersStack}

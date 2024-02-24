@@ -3,9 +3,9 @@ import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import HomePage from './src/screens/HomePage/HomePage'
-import {AllMatches, MDetails, MatchesStack} from './src/screens/AllMatches/AllMatches'
+import {AllMatches, MatchesStack} from './src/screens/AllMatches/AllMatches'
+import {Players , PlayersStack} from './src/screens/Players/Players'
 import {MatchDetails} from './src/screens/MatchDetails/MatchDetails'
-import Players from './src/screens/Players/Players'
 import PlayerDetails from './src/screens/PlayerDetails/PlayerDetails';
 
 
@@ -74,7 +74,7 @@ export default function App() {
             name="MatchDetails"
             component={MatchDetails}
             />  */}
-          <Tab.Screen
+          {/* <Tab.Screen
             name="Players"
             component={Players}
             options={{
@@ -83,7 +83,7 @@ export default function App() {
                 <MaterialCommunityIcons name="shield-star" color={color} size={26} />
               ),
             }}
-          />
+          /> */}
           <Tab.Screen
             name="Account"
             component={AllMatches}
@@ -104,13 +104,24 @@ export default function App() {
               ),
             }}
           /> */}
-               <Tab.Screen
+               {/* <Tab.Screen
             name="PlayerDetails"
             component={PlayerDetails}
             options={{
               tabBarLabel: 'PlayerDetails',
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="Details" color={color} size={26} />
+              ),
+            }}
+          /> */}
+
+            <Tab.Screen
+            name="Players"
+            component={PlayersStack}
+            options={{
+              tabBarLabel: 'Players',
+              tabBarIcon: ({ color }) => (
+                <MaterialCommunityIcons name="panorama-sphere" color={color} size={26} />
               ),
             }}
           />

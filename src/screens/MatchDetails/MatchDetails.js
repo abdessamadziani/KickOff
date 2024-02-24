@@ -67,18 +67,10 @@ function MatchDetails({route}) {
                   <Text style={styles.text_score}>{matche?.data?.scores[5]?.score.goals}</Text> 
                 </View>
                 <View style={{flexDirection: 'row', columnGap:35,marginVertical:20,paddingHorizontal:35,alignSelf:'center',marginLeft:15}}>
-                  <Text style={{backgroundColor:'white',paddingHorizontal:20,paddingVertical:10,borderRadius:10}}>League Name</Text> 
+                  <Text style={{fontWeight:'bold',alignSelf:'center',color:'white',marginLeft:-50,fontSize:15}}>League Name</Text> 
                   <Text style={styles.text_league}>{matche?.data?.league.name}</Text> 
                 </View>
-                {/* <View style={{flexDirection: 'row', columnGap:35,marginVertical:20,paddingHorizontal:35,alignSelf:'center',marginLeft:15}}>
-                  <Text style={styles.text}>stadium</Text> 
-                  <Text style={styles.text}>{matche?.data?.venue.name}</Text> 
-                </View>
-                <View style={{flexDirection: 'row', columnGap:35,marginVertical:20,paddingHorizontal:35,alignSelf:'center',marginLeft:15}}>
-                  <Text style={styles.text}>Result</Text> 
-                  <Text style={styles.text}>{matche?.data?.result_info} </Text> 
-                </View> */}
-    
+             
             </View>
             <View style={styles.card_2}>
                 <View style={{flexDirection: 'row', columnGap:35,marginVertical:20,paddingHorizontal:35,alignSelf:'center',marginLeft:15}}>
@@ -147,8 +139,8 @@ const styles = StyleSheet.create({
       fontWeight:'bold',
       alignSelf:'center',
       backgroundColor:'#FBA834',
-      paddingHorizontal: 25,
-      paddingVertical: 10,
+      paddingHorizontal: 20,
+      paddingVertical: 5,
       borderRadius:10,
     },
     stade_value: {
@@ -165,7 +157,7 @@ const styles = StyleSheet.create({
       fontSize: 13,
       fontWeight:'bold',
       alignSelf:'center',
-      padding: 14,
+      padding: 8,
       borderRadius:50,
       backgroundColor:'black',
       marginStart:-20

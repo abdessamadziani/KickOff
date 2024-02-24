@@ -19,7 +19,7 @@ function PlayerDetails({route}) {
     const fetchPlayer = async () => {
       const options = {
         method: 'GET',
-        url: `https://api.sportmonks.com/v3/football/players/${playerId}?api_token=fSyr6ZRRSV8pMPng0v0EoX3t2uHU61kau88clbO09bTjWtrQvHurZyQzlBR4`,
+        url: `https://api.sportmonks.com/v3/football/players/${playerId}?includes=country;nationality;position;&api_token=fSyr6ZRRSV8pMPng0v0EoX3t2uHU61kau88clbO09bTjWtrQvHurZyQzlBR4`,
 
         headers: {
           // 'X-RapidAPI-Key': '7dbef6b265mshdfac23e28342993p10f9bbjsnebc3f581f050',
@@ -44,55 +44,47 @@ function PlayerDetails({route}) {
   
 
     <ScrollView showsVerticalScrollIndicator={false}>
-       {/* {matche?.data?.map((item, index) => ( */}
-
-      <View style={styles.container}>
-        <Image source={stade} style={styles.img}></Image>
-            <View style={styles.card}>
-                <View style={{flexDirection: 'row', columnGap:15,alignSelf:'center'}}> 
-                        {/* <View style={{display:'block'}}> */}
-                            {/* <Text style={styles.text}>{matche?.data?.participants[0].name}</Text>  */}
-                            <Image source={{uri:player?.data?.image_path}} style={styles.flag}></Image>
-
-                        {/* </View>  */}
-                        <Text style={{color:'white',fontSize:30,fontWeight:'bold', marginHorizontal:5, alignSelf:'center'}}>vs</Text>
-                        {/* <View style={{display:'block'}}> */}
-                            <Image source={{uri:player?.data?.image_path}}  style={styles.flag}></Image>
-                            {/* <Text style={styles.text}>{matche?.data?.participants[1].name} bb</Text>  */}
-
+        <View  style={styles.container}>
+               <Image source={stade} style={styles.img}></Image>
+                <View style={styles.card}>
+                        <Image source={{uri:player?.data?.image_path}} style={styles.img_player}></Image>
+                        <Text style={styles.txt_name}>{player?.data?.firstname}</Text> 
+                        <View style={{flexDirection: 'column', columnGap:15,alignSelf:'center'}}> 
+                                <View style={{flexDirection: 'row', columnGap:15,alignSelf:'center',marginVertical:10}}>
+                                    <Text style={styles.title_nationality}>Nationality</Text> 
+                                    <Text style={styles.value_nationality}>{player?.data?.country.name}</Text> 
+                                    <Image source={{uri:player?.data?.country.image_path}} style={styles.flag_nationality}></Image>
+                                </View> 
+                                <View style={{flexDirection: 'row', columnGap:40,alignSelf:'center',marginVertical:15,width:200,justifyContent:'space-between'}}>
+                                    <Text style={styles.title_pos}>position</Text> 
+                                    <Text style={styles.value_pos}>{player?.data?.position?.name}</Text> 
+                                </View>
+                                <View style={{flexDirection: 'row', columnGap:40,alignSelf:'center',marginVertical:15,width:200,justifyContent:'space-between'}}>
+                                    <Text style={styles.title_height}>Height</Text> 
+                                    <Text style={styles.value_height}>{player?.data?.height}</Text> 
+                                </View>
+                                <View style={{flexDirection: 'row', columnGap:40,alignSelf:'center',width:200,justifyContent:'space-between',marginVertical:15}}>
+                                    <Text style={styles.title_weight}>Weight</Text> 
+                                    <Text style={styles.value_weight}>{player?.data?.weight}</Text> 
+                                </View>
+                                <View style={{flexDirection: 'row', columnGap:40,alignSelf:'center',marginVertical:15,width:200,justifyContent:'space-between'}}>
+                                    <Text style={styles.title_dob}>Date Of birth</Text> 
+                                    <Text style={styles.value_dob}>{player?.data?.date_of_birth}</Text> 
+                                </View>
+                        </View>
                 </View>
-                {/* <View style={{flexDirection: 'row', columnGap:40,marginVertical:20,paddingHorizontal:35,alignSelf:'center',marginLeft:2}}>
-                  <Text style={styles.text_score}>{matche?.data?.scores[2]?.score.goals}</Text> 
-                  <Text style={styles.text_score}>-</Text> 
-                  <Text style={styles.text_score}>{matche?.data?.scores[5]?.score.goals}</Text> 
+
+                {/* <View style={styles.card_2}>
+                    <View style={{flexDirection: 'row', columnGap:35,marginVertical:20,paddingHorizontal:35,alignSelf:'center',marginLeft:15}}>
+                        <Text style={styles.stade_title}>stadium</Text> 
+                        <Text style={styles.stade_value}>{player?.data?.name}</Text> 
+                    </View>
+                    <View style={{flexDirection: 'row', columnGap:35,marginVertical:20,paddingHorizontal:35,alignSelf:'center',marginLeft:15}}>
+                        <Text style={styles.res_title}>Result</Text> 
+                        <Text style={styles.res_value}>{player?.data?.name} </Text> 
+                    </View>
                 </View> */}
-                <View style={{flexDirection: 'row', columnGap:35,marginVertical:20,paddingHorizontal:35,alignSelf:'center',marginLeft:15}}>
-                  <Text style={{backgroundColor:'white',paddingHorizontal:20,paddingVertical:10,borderRadius:10}}>Player Name</Text> 
-                  <Text style={styles.text_league}>{player?.data?.name}</Text> 
-                </View>
-                {/* <View style={{flexDirection: 'row', columnGap:35,marginVertical:20,paddingHorizontal:35,alignSelf:'center',marginLeft:15}}>
-                  <Text style={styles.text}>stadium</Text> 
-                  <Text style={styles.text}>{matche?.data?.venue.name}</Text> 
-                </View>
-                <View style={{flexDirection: 'row', columnGap:35,marginVertical:20,paddingHorizontal:35,alignSelf:'center',marginLeft:15}}>
-                  <Text style={styles.text}>Result</Text> 
-                  <Text style={styles.text}>{matche?.data?.result_info} </Text> 
-                </View> */}
-    
-            </View>
-            <View style={styles.card_2}>
-                <View style={{flexDirection: 'row', columnGap:35,marginVertical:20,paddingHorizontal:35,alignSelf:'center',marginLeft:15}}>
-                      <Text style={styles.stade_title}>stadium</Text> 
-                      <Text style={styles.stade_value}>{player?.data?.name}</Text> 
-                </View>
-                <View style={{flexDirection: 'row', columnGap:35,marginVertical:20,paddingHorizontal:35,alignSelf:'center',marginLeft:15}}>
-                      <Text style={styles.res_title}>Result</Text> 
-                      <Text style={styles.res_value}>{player?.data?.name} </Text> 
-                </View>
-            </View>
-      </View>
-            {/* ))} */}
-
+        </View>
     </ScrollView>
     
   )
@@ -107,8 +99,9 @@ const styles = StyleSheet.create({
       marginTop:20,
     },
     card: {
-        padding: 15,
-        width:350,
+        padding: 20,
+        flexDirection:'column',
+        width:360,
         margin:5,
         backgroundColor:'#1F4172',
         borderRadius:8,
@@ -136,62 +129,140 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
      
     },
-    text_league: {
+    txt_name: {
       fontSize: 30,
-      fontWeight:'bold'
+      fontWeight:'bold',
+      color:'white',
+      alignSelf:'center',
+      marginVertical:4
     },
-    stade_title: {
-      position:'relative',
+    title_nationality: {
+        color:'#F3F8FF',
+         marginButtom:10,
+         padding:5,
+         backgroundColor:'#49108B',
+         borderRadius:10,
+
+         textAlign:'center',
+         fontWeight:'bold',
+         fontSize:15,
+         alignSelf:'center'
+    },
+    value_nationality: {
       color:'#F3F8FF',
       fontSize: 17,
       fontWeight:'bold',
       alignSelf:'center',
-      backgroundColor:'#FBA834',
-      paddingHorizontal: 25,
-      paddingVertical: 10,
-      borderRadius:10,
-    },
-    stade_value: {
-      color:'#F3F8FF',
-      fontSize: 17,
-      fontWeight:'bold',
-      alignSelf:'center',
-      marginEnd:30
+      marginEnd:30,
       
      
     },
-    res_title: {
-      color:'#F3F8FF',
-      fontSize: 13,
-      fontWeight:'bold',
-      alignSelf:'center',
-      padding: 14,
-      borderRadius:50,
-      backgroundColor:'black',
-      marginStart:-20
+    flag_nationality: {
+        width:50,
+        height:30,
+        borderRadius:8,
+        alignSelf:'center'
+
+
 
     },
-    res_value: {
-      color:'#F3F8FF',
-      fontSize: 15,
-      fontWeight:'bold',
-      alignSelf:'center'     
+    title_height: {
+        color:'#F3F8FF',
+        marginButtom:10,
+        // marginLeft:-22,
+        padding:5,
+        backgroundColor:'#49108B',
+        borderRadius:10,
+        // textAlign:'center',
+        fontWeight:'bold',
+        fontSize:15,
+        alignSelf:'center'
     },
-    text_score: {
-        color: 'white',
-        fontSize: 35,
-        fontWeight: 'bold',
+    value_height: {
+        color:'#F3F8FF',
+        fontSize: 17,
+        position:'relative',
+        right:20,
+        // marginLeft:20,
+        fontWeight:'bold',
+        alignSelf:'center',
+        // marginEnd:30,
+    },
+    title_weight: {
+        color:'#F3F8FF',
+        marginButtom:10,
+        // marginLeft:-30,
+        padding:5,
+        backgroundColor:'#49108B',
+        borderRadius:10,
+        // textAlign:'center',
+        fontWeight:'bold',
+        fontSize:15,
+        alignSelf:'center'
        
       },
+    value_weight: {
+        color:'#F3F8FF',
+        position:'relative',
+        right:20,
+        fontSize: 17,
+        fontWeight:'bold',
+        alignSelf:'center',
+        // marginLeft:20,
+    },
+    title_dob: {
+        color:'#F3F8FF',
+        marginButtom:10,
+        // marginLeft:40,
+        // padding:5,
+        backgroundColor:'#49108B',
+        borderRadius:10,
+        // textAlign:'center',
+        fontWeight:'bold',
+        padding:5,
+
+        fontSize:15,
+        alignSelf:'center'
+       
+      },
+    value_dob: {
+        color:'#F3F8FF',
+        fontSize: 17,
+        fontWeight:'bold',
+        alignSelf:'center',
+        marginEnd:30,
+    },
+    title_pos: {
+        color:'#F3F8FF',
+        marginButtom:10,
+        padding:5,
+        // marginLeft:20,
+        // padding:5,
+        backgroundColor:'#49108B',
+        borderRadius:10,
+        // textAlign:'center',
+        fontWeight:'bold',
+        fontSize:15,
+        alignSelf:'center'
+       
+      },
+    value_pos: {
+        color:'#F3F8FF',
+        fontSize: 17,
+        fontWeight:'bold',
+        alignSelf:'center',
+        // marginEnd:30,
+    },
      
-    flag: {
-        width: 50,
-        height: 50,
-        borderRadius:500
+    img_player: {
+        width: 100,
+        height: 100,
+        borderRadius:500,
+        alignSelf:'center'
     },
     img: {
         width: 400,
-        height: 200,
+        height: 150,
     }
  
   });
