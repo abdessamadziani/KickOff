@@ -7,6 +7,8 @@ import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MatchDetails from '../MatchDetails/MatchDetails';
+import { useDispatch,useSelector } from 'react-redux'
+
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +30,7 @@ const MatchesStack = () => {
   );
 };
 const AllMatches = () => {
+  const dispatch=useDispatch()
   const navigation = useNavigation();
   const [matches, setMatches] = useState([]);
 
@@ -54,24 +57,31 @@ const AllMatches = () => {
   }, []);
 
   const handleMatchPress = (matchId) => {
-    navigation.navigate('MatchDetails', { matchId: matchId });
+     navigation.navigate('MatchDetails', { matchId: matchId });
   };
+  // const datastore = useSelector((state) =>{ return state.match.value} );
+  
+
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <Image source={Cup} style={styles.img} />
-        <Text style={styles.title}>All Matches</Text>
+        <Text style={styles.title}>all matches</Text>
         {matches?.data?.map((matche, index) => (
           <CustomCard
             key={index}
-            name1={matche.participants[0].name}
-            name2={matche.participants[1].name}
+            match_id={matche.id}
+            name1={matche.participants[0].short_code}
+            name2={matche.participants[1].short_code}
             date={matche.starting_at.split(' ')[0]}
             time={matche.starting_at.split(' ')[1]}
             url1={matche.participants[0].image_path}
             url2={matche.participants[1].image_path}
             onPress={() => handleMatchPress(matche.id)}
+            // matchData={matche}
+            // onPress={() => handleMatchPress(matche)}
+
           />
         ))}
       </View>

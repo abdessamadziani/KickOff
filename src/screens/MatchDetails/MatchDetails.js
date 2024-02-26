@@ -5,9 +5,11 @@ import spain from '../../../assets/Spain-flag.png'
 import stade from '../../../assets/stade.jpg'
 
 import axios from 'axios'
+import { UseDispatch,useSelector } from 'react-redux'
 
 function MatchDetails({route}) {
 
+     const data = useSelector((state) =>{ console.log(state)  } );
 
 
   const {matchId} =route.params

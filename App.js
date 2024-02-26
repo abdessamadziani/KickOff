@@ -1,22 +1,22 @@
 import React, { useEffect } from 'react';
 
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {View ,Text} from 'react-native'
 import HomePage from './src/screens/HomePage/HomePage'
 import {AllMatches, MatchesStack} from './src/screens/AllMatches/AllMatches'
 import {Players , PlayersStack} from './src/screens/Players/Players'
-import {MatchDetails} from './src/screens/MatchDetails/MatchDetails'
-import PlayerDetails from './src/screens/PlayerDetails/PlayerDetails';
 
 
-// import { Provider, useDispatch, useSelector } from 'react-redux';
-// import store from './src/store';
+
+import { Provider, useDispatch, useSelector } from 'react-redux';
+import {store}from './src/store';
+
 // import { fetchData } from './src/api';
 
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Favorites from './src/screens/Favorites/Favorites';
 
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -27,21 +27,18 @@ const Tab = createMaterialBottomTabNavigator();
 export default function App() {
 
   // const dispatch = useDispatch();
-  // const data = useSelector((state) => state.data);
+  // const data = useSelector((state) =>{console.log("the state is",state) 
+  //  return 100 } );
   // useEffect(() => {
   //   dispatch(fetchData());
   //  }, []);
 
   return (
-    <>
-    {/* <Provider store={store}>
-         <View>
-              {data.map((item) => (
-              <Text key={item.id}>{item.name}</Text>
-              ))}
-        </View>
-    </Provider> */}
-    
+   <Provider store={store}>
+      {/* <View>
+          <Text>{data}</Text>
+      </View> */}
+       
       <NavigationContainer>
         <Tab.Navigator
           initialRouteName="Home"
@@ -70,50 +67,9 @@ export default function App() {
               ),
             }}
           />
-            {/* <Tab.Screen
-            name="MatchDetails"
-            component={MatchDetails}
-            />  */}
-          {/* <Tab.Screen
-            name="Players"
-            component={Players}
-            options={{
-              tabBarLabel: 'Players',
-              tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="shield-star" color={color} size={26} />
-              ),
-            }}
-          /> */}
-          <Tab.Screen
-            name="Account"
-            component={AllMatches}
-            options={{
-              tabBarLabel: 'Account',
-              tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="account" color={color} size={26} />
-              ),
-            }}
-          />
-            {/* <Tab.Screen
-            name="MatchDetails"
-            component={MatchDetails}
-            options={{
-              tabBarLabel: 'Details',
-              tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="Details" color={color} size={26} />
-              ),
-            }}
-          /> */}
-               {/* <Tab.Screen
-            name="PlayerDetails"
-            component={PlayerDetails}
-            options={{
-              tabBarLabel: 'PlayerDetails',
-              tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="Details" color={color} size={26} />
-              ),
-            }}
-          /> */}
+       
+      
+
 
             <Tab.Screen
             name="Players"
@@ -125,11 +81,21 @@ export default function App() {
               ),
             }}
           />
+              <Tab.Screen
+            name="Favorites"
+            component={Favorites}
+            options={{
+              tabBarLabel: 'Favorites',
+              tabBarIcon: ({ color }) => (
+                <MaterialCommunityIcons name="heart" color={color} size={26} />
+              ),
+            }}
+          />
         </Tab.Navigator>
-      </NavigationContainer> 
+      </NavigationContainer>
+   </Provider> 
 
 
-      </>
   );
 }
 

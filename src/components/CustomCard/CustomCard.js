@@ -1,14 +1,16 @@
 import React from 'react'
-import { Text,View,Image,StyleSheet } from 'react-native'
+import { Text,View,Image,StyleSheet ,TouchableOpacity } from 'react-native'
 import morocco from '../../../assets/morocco-flag.png'
 import spain from '../../../assets/Spain-flag.png'
 import CustomButton from '../CustomButton/CustomButton'
 import MatchDetails from '../../screens/MatchDetails/MatchDetails'
+import { updateStore } from '../../reducers'
+import { useDispatch,useSelector } from 'react-redux'
+import FavoriteBtn from '../CustomButton/FavoriteBtn'
 
 
 
-
-function CustomCard({url1,url2,name1,name2,date,time,onPress}) {
+function CustomCard({match_id,url1,url2,name1,name2,date,time,onPress,matchData}) {
 
   return (
     
@@ -30,10 +32,18 @@ function CustomCard({url1,url2,name1,name2,date,time,onPress}) {
              <Text style={{color:'#F3F8FF', marginButtom:10,padding:3,backgroundColor:'#49108B',borderRadius:10,textAlign:'center',fontWeight:'bold',fontSize:10}}>Date</Text>
              <Text style={styles.text}>{date}</Text>
          </View>
-         {/* <View style={{display:'block' }}>
-           <Text style={{color:'#F3F8FF', marginButtom:10,padding:3,backgroundColor:'#49108B',borderRadius:10,textAlign:'center',fontWeight:'bold',fontSize:10}}>Time</Text>
-           <Text style={styles.text}>{time}</Text>
-         </View> */}
+       
+          
+            <FavoriteBtn
+                match_id={match_id}
+                urls={[url1, url2]}
+                names={ [name1, name2]}
+                date={date}
+                time={time}
+
+                 />
+
+        
     </View>
     <View style={{flexDirection: 'row', columnGap:15,marginTop:20}}>
          <CustomButton onPress={onPress} text="Check Details" style={styles.text_result}/>

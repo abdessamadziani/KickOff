@@ -1,6 +1,11 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { Pressable, Text, TextInput, View,Image } from 'react-native'
+import { useSelector,useDispatch } from 'react-redux';
+import CustomButton from '../../components/CustomButton/CustomButton';
+
 function HomePage({ navigation}) {
+
+
   return (
     <View>
       <Text>All Matches</Text>
@@ -19,8 +24,7 @@ function HomePage({ navigation}) {
         <Text>Time</Text>
         <Text>09:00 pm</Text>
 
-
-
+        <CustomButton text="add" onPress={()=>dispatch(increment())}></CustomButton>
         <Text>Morocco won after full-time</Text>
         <Text>league Name</Text>
 

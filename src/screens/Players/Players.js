@@ -7,7 +7,7 @@ import axios from 'axios'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import PlayerDetails from '../PlayerDetails/PlayerDetails';
-
+import CustomInput from '../../components/CustomInput/CustomInput'
 const Stack = createNativeStackNavigator();
 const PlayersStack = () => {
   return (
@@ -35,6 +35,7 @@ const Players = () => {
   
 
   const [players, setPlayers] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const fetchPlayers = async () => {
@@ -50,7 +51,7 @@ const Players = () => {
 
       try {
         const response = await axios.request(options);
-        setPlayers(response.data);
+        setPlayers(response.data.data);
       } catch (error) {
         console.error(error);
       }
@@ -58,6 +59,10 @@ const Players = () => {
 
     fetchPlayers();
   }, []);
+
+  const filteredPlayers = players?.filter(player =>
+    player.firstname.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   console.log("direct ::: ",players?.data)
  
   return (
@@ -68,11 +73,18 @@ const Players = () => {
 
       <View style={styles.container}>
         <Image source={stade} style={styles.img}></Image>
+        <CustomInput
+          name="search"
+          placeholder="Search by player name"
+          // value={value}
+           onChangeText={setSearchQuery}
+        />
             <View style={styles.card}>
-             {players?.data?.map((player,index) => (
+             {filteredPlayers.map((player,index) => (
               <Pressable onPress={()=>handleMatchPress(player.id)}>
                 <View key={index}  > 
-                        <Image key={player.id} source={{uri:player.image_path}} style={styles.flag}></Image>
+                        <Image key={player.id} source={{uri:player.image_path}} style={styles.player_img}></Image>
+                        <Text style={styles.text}>{player.firstname}</Text>
                 </View>
                 </Pressable>
                 ))}
@@ -89,12 +101,10 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#001524',
       alignItems: 'center',
+      height:1100,
       marginTop:20,
     },
-    tt: {
-        display:'block'
-
-    },
+  
     card: {
         flexDirection: 'row',
         gap:30,
@@ -111,19 +121,15 @@ const styles = StyleSheet.create({
     
     text: {
       color: 'white',
-      fontSize: 15,
-      alignSelf:'center',
+      fontSize: 8,
+      // alignSelf:'center',
+      textAlign:'center',
       fontWeight: 'bold',
      
     },
-    text_score: {
-        color: 'white',
-        fontSize: 30,
-        fontWeight: 'bold',
-       
-      },
+   
      
-    flag: {
+    player_img: {
         width: 50,
         height: 50,
         borderRadius:500,
